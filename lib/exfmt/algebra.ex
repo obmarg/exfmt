@@ -69,7 +69,7 @@ defmodule Exfmt.Algebra do
   #
   # Lifted from Elixir 1.4's `Inspect.Algebra.doc_break/1`
   #
-  @typep doc_break :: {:doc_break, binary}
+  @typep doc_break :: {:doc_break, binary, binary}
   defmacrop doc_break(unbroken, broken) do
     quote do
       {:doc_break, unquote(unbroken), unquote(broken)}

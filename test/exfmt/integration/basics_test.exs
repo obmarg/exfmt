@@ -415,4 +415,12 @@ defmodule Exfmt.Integration.BasicsTest do
     end
     """
   end
+
+  test "comments within list" do
+    assert_format """
+    [:one_one_one,
+     # hi
+     :two_two_two]
+    """
+  end
 end

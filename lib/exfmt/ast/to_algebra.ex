@@ -91,6 +91,8 @@ defmodule Exfmt.Ast.ToAlgebra do
     surround("(", fun_doc, ")")
   end
 
+  # TODO: If a list contains a comment block always render it with breaks
+
   #
   # Lists
   #
