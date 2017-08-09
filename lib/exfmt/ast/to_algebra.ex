@@ -358,8 +358,15 @@ defmodule Exfmt.Ast.ToAlgebra do
   #
   def to_algebra({{:., _, [aliases, name]}, _, []}, ctx) do
     new_ctx = Context.push_stack(ctx, :call)
+    # TODO: Only if LHS is atom or module alias right now...
     module = to_algebra(aliases, new_ctx)
-    concat(module, ".#{name}")
+    IO.inspect aliases
+    IO.inspect name
+    if Enum.member?(ctx.stack, :spec_rhs) or Enum.member?(ctx.stack, :spec_lhs) do
+      concat(module, ".#{name}")
+    else
+      concat(module, ".#{name}()")
+    end
   end
 
   #
@@ -381,7 +388,6 @@ defmodule Exfmt.Ast.ToAlgebra do
     call = call_to_algebra(to_string(name), args, new_ctx)
     concat(concat(module, "."), call)
   end
-
 
   #
   # Function calls and sigils
